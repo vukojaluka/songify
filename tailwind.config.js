@@ -5,6 +5,12 @@ export default {
     content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     theme: {
         extend: {
+            fontFamily: {
+                montserrat: ['Montserrat', 'sans-serif'],
+            },
+            maxWidth: {
+                1200: '75rem',
+            },
             borderRadius: {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
@@ -13,6 +19,7 @@ export default {
             colors: {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
+                'sidebar-background': 'hsl(var(--sidebar-background))',
                 card: {
                     DEFAULT: 'hsl(var(--card))',
                     foreground: 'hsl(var(--card-foreground))',

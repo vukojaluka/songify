@@ -1,11 +1,10 @@
 <script setup lang="ts">
     import { RouterView } from 'vue-router'
+    import RootLayout from '@/components/layout/RootLayout.vue'
 </script>
 
 <template>
-    <header class="">HEADER</header>
-
-    <RouterView />
+    <RootLayout />
 </template>
 
 <style scoped></style>

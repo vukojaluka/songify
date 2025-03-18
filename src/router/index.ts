@@ -12,11 +12,16 @@ const router = createRouter({
                 title: 'Home',
             },
         },
-        /* {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
-    }, */
+        {
+            path: '/playlists',
+            name: 'playlists',
+            component: () => import('../views/PlaylistsView.vue'),
+        },
+        {
+            path: '/favorites',
+            name: 'favorites',
+            component: () => import('../views/FavoritesView.vue'),
+        },
     ],
 })
 
@@ -24,7 +29,15 @@ router.beforeEach((to, from, next) => {
     if (to.meta.title) {
         document.title = `${to.meta.title} - Songify`
     }
+
     next()
+
+    /* if (!document.startViewTransition) {
+        next()
+        return
+    }
+
+    document.startViewTransition(() => next()) */
 })
 
 export default router
