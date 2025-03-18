@@ -1,26 +1,26 @@
 # Songify
 
-This template should help get you started developing with Vue 3 in Vite.
+Project is consisted out of a frontend UI for a Music Library.
 
-## Recommended IDE Setup
+## Short Description
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+This project uses [pnpm](https://pnpm.io/) as the package manager and was initialized using:
 
-## Type Support for `.vue` Imports in TS
+```sh
+pnpm create vue@latest
+```
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+with following options: Typescript, Vue Router, Pinia, Prettier and ESLint.
 
-## Customize configuration
+For the styling it is using tailwind 3 css and [shadcn/vue](https://www.shadcn-vue.com/) components based on tailwind.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## Install Dependencies
 
 ```sh
 pnpm install
 ```
 
-### Compile and Hot-Reload for Development
+### Start Local Dev
 
 ```sh
 pnpm dev
