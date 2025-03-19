@@ -17,6 +17,9 @@ export default {
                 sm: 'calc(var(--radius) - 4px)',
             },
             colors: {
+                'progress-bar': 'hsl(var(--progress-bar))',
+                'switch-thumb-background': 'hsl(var(--switch-thumb-background))',
+                placeholder: 'hsl(var(--placeholder))',
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 'sidebar-background': 'hsl(var(--sidebar-background))',

@@ -6,7 +6,7 @@ export const navigationLinks = [
     {
         label: 'Songs',
         path: '/',
-        name: 'home',
+        name: 'songs',
         icon: IconSongs,
     },
     {
