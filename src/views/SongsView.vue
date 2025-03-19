@@ -1,8 +1,8 @@
 <script setup lang="ts">
     import { Search } from '@/components/shared/search-bar'
     import { SectionHeader } from '@/components/shared/section-header'
-    import { FeaturedPlaylists } from '@/components/shared/featured-playlists'
-    import { RecommendedSongs } from '@/components/shared/recommended-songs'
+    import { FeaturedPlaylists } from '@/components/pages/songs/featured-playlists'
+    import { RecommendedSongs } from '@/components/pages/songs/recommended-songs'
 </script>
 
 <template>

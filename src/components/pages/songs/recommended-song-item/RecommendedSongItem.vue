@@ -16,10 +16,14 @@
     const featuredDataStore = useFeaturedDataStore()
 
     const isFavoriteAnimating = ref(false)
-    function toggleFavoriteSong(songId: number) {
-        isFavoriteAnimating.value = !props.song.isFavorite ? true : false
-        userDataStore.toggleFavoriteSong(songId)
-        featuredDataStore.toggleRecommendedFavoriteSong(songId)
+    function toggleFavoriteSong(song: (typeof songs)[number]) {
+        isFavoriteAnimating.value = !song.isFavorite ? true : false
+        if (song.isFavorite) {
+            userDataStore.removeSongFromFavorites(song.id)
+        } else {
+            userDataStore.addSongToFavorites(song)
+        }
+        featuredDataStore.toggleRecommendedFavoriteSong(song.id)
     }
 </script>
 
@@ -34,7 +38,7 @@
                             <IconPlaylistAdd />
                         </button>
                         <button
-                            @click="toggleFavoriteSong(props.song.id)"
+                            @click="toggleFavoriteSong(props.song)"
                             :class="[
                                 props.song.isFavorite ? 'text-destructive' : 'text-action-button',
                                 { 'animate-pulse': isFavoriteAnimating },
