@@ -1,73 +1,54 @@
 <script setup lang="ts">
-    import { ref } from 'vue'
+    import { ref, computed } from 'vue'
 
     import SongItem from '@/components/shared/song-item/SongItem.vue'
     import IconPlaylistAdd from '@/components/icons/IconPlaylistAdd.vue'
     import IconHeart from '@/components/icons/IconHeart.vue'
 
     import { useFeaturedDataStore } from '@/stores/featured-data'
-    import { useUserDataStore } from '@/stores/user-data'
+    import { useUserSongsStore } from '@/stores/user-songs'
 
     import { songs } from '@/lib/data'
-
+    import { timeAgo } from '@/lib/utils'
     const props = defineProps<{
         favorite: (typeof songs)[number]
     }>()
 
-    const userDataStore = useUserDataStore()
+    const userSongsStore = useUserSongsStore()
     const featuredDataStore = useFeaturedDataStore()
 
     const isFavoriteAnimating = ref(false)
-    function toggleFavoriteSong(song: (typeof songs)[number]) {
+    function removeFavoriteSong(song: (typeof songs)[number]) {
         isFavoriteAnimating.value = !song.isFavorite ? true : false
-        if (song.isFavorite) {
-            userDataStore.removeSongFromFavorites(song.id)
-        } else {
-            userDataStore.addSongToFavorites(song)
-        }
+        userSongsStore.removeSongFromFavorites(song.id)
         featuredDataStore.toggleRecommendedFavoriteSong(song.id)
     }
+
+    const formattedTimeAgo = computed(() => {
+        if (!props.favorite.createdAt) return ''
+        return timeAgo(props.favorite.createdAt)
+    })
 </script>
 
 <template>
-    <SongItem :song="props.favorite">
+    <SongItem :song="props.favorite" :key="props.favorite.id">
         <template #actions="{ isPlaying }">
             <div class="ml-auto flex items-center gap-[22px] pl-[15px]">
                 <span class="block text-sm leading-[150%]">{{ props.favorite.duration }}</span>
-                <transition name="actions-fade">
-                    <div v-if="!isPlaying" class="flex flex-col">
-                        <div class="flex items-center gap-[22px]">
-                            <button>
-                                <IconPlaylistAdd />
-                            </button>
-                            <button
-                                @click="toggleFavoriteSong(props.favorite)"
-                                :class="[
-                                    props.favorite.isFavorite
-                                        ? 'text-destructive'
-                                        : 'text-action-button',
-                                    { 'animate-pulse': isFavoriteAnimating },
-                                    { 'transition-colors duration-100': !isFavoriteAnimating },
-                                ]"
-                            >
-                                <IconHeart
-                                    :class="{
-                                        'transition-fill duration-100': !isFavoriteAnimating,
-                                    }"
-                                    :stroke="
-                                        props.favorite.isFavorite ? 'currentColor' : 'currentColor'
-                                    "
-                                    :fill="
-                                        props.favorite.isFavorite ? 'currentColor' : 'transparent'
-                                    "
-                                />
-                            </button>
-                        </div>
-                        <span class="text-sm leading-[150%]">{{
-                            props.favorite.createdAt?.toLocaleString()
-                        }}</span>
+                <div v-if="!isPlaying" class="flex w-[70px] flex-col gap-[7px]">
+                    <div class="flex items-center gap-[22px]">
+                        <button>
+                            <IconPlaylistAdd />
+                        </button>
+                        <button
+                            @click="removeFavoriteSong(props.favorite)"
+                            class="text-destructive"
+                        >
+                            <IconHeart stroke="currentColor" fill="currentColor" />
+                        </button>
                     </div>
-                </transition>
+                    <span class="truncate text-sm leading-[100%]">{{ formattedTimeAgo }}</span>
+                </div>
             </div>
         </template>
     </SongItem>

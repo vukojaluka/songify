@@ -6,7 +6,7 @@
 
 <template>
     <Search placeholder="Search Favorites" type="favorites" />
-    <SectionHeader title="Favorites">
+    <SectionHeader title="Favorites" sectionContentClass="lg:pl-[41px]">
         <FavoritesList />
     </SectionHeader>
 </template>

@@ -1,7 +1,12 @@
 <script setup lang="ts">
-    const { title, class: className } = defineProps<{
+    const {
+        title,
+        class: className,
+        sectionContentClass: sectionContentClassName,
+    } = defineProps<{
         title: string
         class?: string
+        sectionContentClass?: string
     }>()
 </script>
 
@@ -10,7 +15,7 @@
         <h2 class="py-[12px] pl-[14px] text-xl font-bold leading-[100%] lg:pl-[22px]">
             {{ title }}
         </h2>
-        <div class="lg:pl-[58px]">
+        <div :class="['lg:pl-[58px]', sectionContentClassName]">
             <slot />
         </div>
     </section>

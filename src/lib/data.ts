@@ -165,7 +165,7 @@ export const songs = [
     artist: string
     duration: string
     isFavorite: boolean
-    createdAt: null | string | Date
+    createdAt: null | string
 }[]
 
 export const featuredPlaylists = [

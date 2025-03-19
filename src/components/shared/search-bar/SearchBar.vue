@@ -6,6 +6,7 @@
 
     import { useTheme } from '@/hooks/use-theme'
     import { useFeaturedDataStore } from '../../../stores/featured-data'
+    import { useUserSongsStore } from '../../../stores/user-songs'
 
     const props = defineProps<{
         placeholder?: string
@@ -13,6 +14,7 @@
     }>()
 
     const featuredDataStore = useFeaturedDataStore()
+    const userSongsStore = useUserSongsStore()
 
     const searchQuery = computed({
         get() {
@@ -39,6 +41,7 @@
                     break
                 case 'favorites':
                     //favoritesSearchQuery.value = value
+                    userSongsStore.searchFavoriteSongsQuery = value
                     // Update store for favorites when implemented
                     break
             }

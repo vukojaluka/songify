@@ -78,8 +78,8 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         transition:
-            background-color 0.2s ease,
-            color 0.2s ease;
+            background-color 0.2s ease-out,
+            color 0.2s ease-out;
         line-height: 100%;
         text-wrap: pretty;
     }

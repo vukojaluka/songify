@@ -66,7 +66,7 @@
 <style scoped>
     .fade-details-enter-active,
     .fade-details-leave-active {
-        @apply absolute left-[var(--circle-size)] w-full transition-opacity duration-300 ease-in-out;
+        @apply absolute left-[var(--circle-size)] w-full transition-opacity duration-200 ease-in;
     }
     .fade-details-enter-from {
         @apply opacity-0;
@@ -78,8 +78,8 @@
     .progress-enter-active,
     .progress-leave-active {
         transition:
-            opacity 0.4s ease-in-out,
-            transform 0.2s ease-in-out;
+            opacity 0.2s ease-in,
+            transform 0.2s ease-in;
         @apply origin-left lg:origin-right;
     }
     .progress-leave-active {

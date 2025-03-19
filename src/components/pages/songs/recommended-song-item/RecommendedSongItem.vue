@@ -1,10 +1,10 @@
 <script setup lang="ts">
-    import { ref } from 'vue'
+    import { onUnmounted, ref } from 'vue'
     import { SongItem } from '@/components/shared/song-item'
     import IconHeart from '@/components/icons/IconHeart.vue'
     import IconPlaylistAdd from '@/components/icons/IconPlaylistAdd.vue'
 
-    import { useUserDataStore } from '@/stores/user-data'
+    import { useUserSongsStore } from '@/stores/user-songs'
     import { useFeaturedDataStore } from '@/stores/featured-data'
     import { songs } from '@/lib/data'
 
@@ -12,19 +12,33 @@
         song: (typeof songs)[number]
     }>()
 
-    const userDataStore = useUserDataStore()
+    const userSongsStore = useUserSongsStore()
     const featuredDataStore = useFeaturedDataStore()
 
     const isFavoriteAnimating = ref(false)
+    const isFavoriteAnimatingTimeout = ref<number | null>(null)
+    const FAVORITE_ANIMATION_DURATION = 500
+
     function toggleFavoriteSong(song: (typeof songs)[number]) {
         isFavoriteAnimating.value = !song.isFavorite ? true : false
         if (song.isFavorite) {
-            userDataStore.removeSongFromFavorites(song.id)
+            userSongsStore.removeSongFromFavorites(song.id)
         } else {
-            userDataStore.addSongToFavorites(song)
+            userSongsStore.addSongToFavorites(song)
         }
         featuredDataStore.toggleRecommendedFavoriteSong(song.id)
+
+        isFavoriteAnimatingTimeout.value = setTimeout(() => {
+            isFavoriteAnimating.value = false
+        }, FAVORITE_ANIMATION_DURATION)
     }
+
+    onUnmounted(() => {
+        if (isFavoriteAnimatingTimeout.value) {
+            clearTimeout(isFavoriteAnimatingTimeout.value)
+            isFavoriteAnimatingTimeout.value = null
+        }
+    })
 </script>
 
 <template>
@@ -42,11 +56,11 @@
                             :class="[
                                 props.song.isFavorite ? 'text-destructive' : 'text-action-button',
                                 { 'animate-pulse': isFavoriteAnimating },
-                                { 'transition-colors duration-100': !isFavoriteAnimating },
+                                { 'transition-colors duration-200': !isFavoriteAnimating },
                             ]"
                         >
                             <IconHeart
-                                :class="{ 'transition-fill duration-100': !isFavoriteAnimating }"
+                                :class="{ 'transition-fill duration-200': !isFavoriteAnimating }"
                                 :stroke="props.song.isFavorite ? 'currentColor' : 'currentColor'"
                                 :fill="props.song.isFavorite ? 'currentColor' : 'transparent'"
                             />
@@ -72,7 +86,7 @@
     }
 
     .animate-pulse {
-        animation: pulse 0.5s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+        animation: pulse 0.2s ease-out;
     }
 
     @keyframes pulse {
