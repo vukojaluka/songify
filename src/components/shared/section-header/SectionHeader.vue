@@ -6,7 +6,7 @@
 </script>
 
 <template>
-    <section :class="['flex flex-col gap-[22px] pt-[9px] lg:pt-[5px]', className]">
+    <section :class="['flex flex-col gap-[16px] pt-[9px] lg:gap-[22px] lg:pt-[5px]', className]">
         <h2 class="py-[12px] pl-[14px] text-xl font-bold leading-[100%] lg:pl-[22px]">
             {{ title }}
         </h2>

@@ -22,7 +22,7 @@ export const useFeaturedDataStore = defineStore('featured-data', () => {
         )
     })
 
-    function toggleFavoriteSong(songId: number) {
+    function toggleRecommendedFavoriteSong(songId: number) {
         const song = featuredSongs.value.find((song) => song.id === songId)
         if (song) {
             song.isFavorite = !song.isFavorite
@@ -34,6 +34,6 @@ export const useFeaturedDataStore = defineStore('featured-data', () => {
         featuredPlaylists,
         filteredSongs,
         searchSongsQuery,
-        toggleFavoriteSong,
+        toggleRecommendedFavoriteSong,
     }
 })

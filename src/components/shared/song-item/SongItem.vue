@@ -13,20 +13,24 @@
 
     function togglePlay() {
         isPlaying.value = !isPlaying.value
-        console.log('togglePlay', isPlaying.value)
     }
 </script>
 
 <template>
     <div class="relative flex h-[50px] items-center">
-        <button @click="togglePlay">
-            <Circle>
+        <button @click="togglePlay" class="relative size-[44px]">
+            <Circle
+                class="absolute inset-0"
+                :class="!isPlaying ? 'pl-[16px] pr-[12px] opacity-100' : 'opacity-0'"
+            >
                 <IconPlay
-                    class="absolute text-black transition-opacity duration-300 ease-in-out"
+                    class="text-black transition-opacity duration-300 ease-in-out dark:text-foreground"
                     :class="!isPlaying ? 'opacity-100' : 'opacity-0'"
                 />
+            </Circle>
+            <Circle class="absolute inset-0" :class="isPlaying ? 'opacity-100' : 'opacity-0'">
                 <IconPause
-                    class="absolute text-black transition-opacity duration-300 ease-in-out"
+                    class="absolute text-black transition-opacity duration-300 ease-in-out dark:text-foreground"
                     :class="isPlaying ? 'opacity-100' : 'opacity-0'"
                 />
             </Circle>
@@ -37,8 +41,8 @@
                 v-if="!isPlaying"
                 :key="`song-item-details-${isPlaying}`"
             >
-                <p class="text-base font-bold">{{ props.song.artist }}</p>
-                <h3 class="text-xs">{{ props.song.title }}</h3>
+                <p class="truncate text-base font-bold">{{ props.song.artist }}</p>
+                <h3 class="truncate text-xs">{{ props.song.title }}</h3>
             </div>
         </transition>
         <transition name="progress">
@@ -62,16 +66,13 @@
 <style scoped>
     .fade-details-enter-active,
     .fade-details-leave-active {
-        transition: opacity 0.3s ease-in-out;
-        position: absolute; /* Make it absolute during transition */
-        left: 44px;
-        width: 100%; /* Ensure it doesn’t shrink */
+        @apply absolute left-[var(--circle-size)] w-full transition-opacity duration-300 ease-in-out;
     }
     .fade-details-enter-from {
-        opacity: 0;
+        @apply opacity-0;
     }
     .fade-details-leave-to {
-        opacity: 0;
+        @apply opacity-0;
     }
 
     .progress-enter-active,
@@ -79,14 +80,15 @@
         transition:
             opacity 0.4s ease-in-out,
             transform 0.2s ease-in-out;
-        transform-origin: right;
+        @apply origin-left lg:origin-right;
+    }
+    .progress-leave-active {
+        @apply absolute left-[var(--circle-size)] lg:static lg:left-[unset];
     }
     .progress-enter-from {
-        opacity: 0;
-        transform: scaleX(0);
+        @apply scale-x-0 opacity-0;
     }
     .progress-leave-to {
-        opacity: 0;
-        transform: scaleX(0);
+        @apply scale-x-0 opacity-0;
     }
 </style>

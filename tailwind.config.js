@@ -5,6 +5,9 @@ export default {
     content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     theme: {
         extend: {
+            transitionProperty: {
+                fill: 'fill',
+            },
             fontFamily: {
                 montserrat: ['Montserrat', 'sans-serif'],
             },
@@ -17,6 +20,7 @@ export default {
                 sm: 'calc(var(--radius) - 4px)',
             },
             colors: {
+                'action-button': 'hsl(var(--action-button))',
                 'progress-bar': 'hsl(var(--progress-bar))',
                 'switch-thumb-background': 'hsl(var(--switch-thumb-background))',
                 placeholder: 'hsl(var(--placeholder))',

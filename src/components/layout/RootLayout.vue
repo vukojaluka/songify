@@ -8,7 +8,7 @@
         class="mx-auto grid min-h-screen max-w-[1200px] grid-cols-1 overflow-hidden rounded-[43px] lg:grid-cols-[var(--sidebar-width)_1fr]"
     >
         <aside
-            class="fixed bottom-0 left-0 h-auto w-full rounded-bl-[43px] rounded-br-[43px] bg-sidebar-background lg:relative lg:h-full lg:rounded-bl-none lg:rounded-br-none lg:py-[68px]"
+            class="fixed bottom-0 left-0 z-50 h-auto w-full rounded-bl-[43px] rounded-br-[43px] bg-sidebar-background lg:relative lg:h-full lg:rounded-bl-none lg:rounded-br-none lg:py-[68px]"
         >
             <SideMenu />
         </aside>

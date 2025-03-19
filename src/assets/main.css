@@ -35,6 +35,8 @@
         --placeholder: 173 6% 75%;
         --switch-thumb-background: 180 47% 97%;
         --progress-bar: 174 46% 16%;
+        --circle-size: 44px;
+        --action-button: 173 6% 75%;
     }
     .dark {
         --background: 174 46% 16%;
@@ -63,6 +65,7 @@
         --chart-5: 340 75% 55%;
         --sidebar-background: 0 0% 5%;
         --switch-thumb-background: 0 0% 8%;
+        --progress-bar: 174 46% 84%;
     }
 }
 @layer base {

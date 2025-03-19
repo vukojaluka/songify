@@ -7,7 +7,7 @@
 <template>
     <div class="relative">
         <div
-            class="scrollbar-hidden flex max-w-fit snap-x snap-mandatory flex-nowrap gap-[9px] overflow-x-auto scroll-smooth pr-[22px]"
+            class="scrollbar-hidden flex max-w-fit snap-x snap-mandatory flex-nowrap gap-[20px] overflow-x-auto scroll-smooth pr-[22px] lg:gap-[9px]"
         >
             <RouterLink
                 v-for="playlist in featuredDataStore.featuredPlaylists"
@@ -30,17 +30,16 @@
             </RouterLink>
         </div>
         <div
-            class="opacity-1 absolute right-0 top-0 h-[240px] w-[75px] bg-[linear-gradient(90deg,hsla(0,0%,100%,0),hsla(0,0%,100%,1))] dark:bg-[linear-gradient(to_right,hsla(0,0%,0%,0)_35%,hsla(0,0%,0%,0.25),hsla(0,0%,0%,0.5))] dark:opacity-50 lg:w-[147px]"
+            class="opacity-1 absolute right-0 top-0 h-[240px] w-[50px] bg-[linear-gradient(90deg,hsla(0,0%,100%,0),hsla(0,0%,100%,1))] dark:bg-[linear-gradient(to_right,hsla(0,0%,0%,0)_35%,hsla(0,0%,0%,0.25),hsla(0,0%,0%,0.5))] dark:opacity-50 lg:w-[147px] lg:w-[75px]"
         />
     </div>
 </template>
 
 <style scoped>
-    /* Hide scrollbar but allow scrolling */
     .scrollbar-hidden {
-        scrollbar-width: none; /* Firefox */
+        scrollbar-width: none;
     }
     .scrollbar-hidden::-webkit-scrollbar {
-        display: none; /* Chrome, Safari */
+        display: none;
     }
 </style>
