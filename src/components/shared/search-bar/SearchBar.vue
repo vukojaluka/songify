@@ -5,26 +5,27 @@
     import IconSearch from '@/components/icons/IconSearch.vue'
 
     import { useTheme } from '@/hooks/use-theme'
-    import { useFeaturedDataStore } from '../../../stores/featured-data'
-    import { useUserSongsStore } from '../../../stores/user-songs'
+    import { useSongsStore } from '../../../stores/useSongs'
+    import { useFavoritesStore } from '../../../stores/useFavorites'
+    import { usePlaylistsStore } from '../../../stores/usePlaylists'
 
     const props = defineProps<{
         placeholder?: string
         type: 'recommended' | 'playlists' | 'favorites'
     }>()
 
-    const featuredDataStore = useFeaturedDataStore()
-    const userSongsStore = useUserSongsStore()
-
+    const songsStore = useSongsStore()
+    const favoritesStore = useFavoritesStore()
+    const playlistsStore = usePlaylistsStore()
     const searchQuery = computed({
         get() {
             switch (props.type) {
                 case 'recommended':
-                    return featuredDataStore.searchSongsQuery
+                    return songsStore.searchSongsQuery
                 case 'playlists':
-                    return ''
+                    return playlistsStore.searchQuery
                 case 'favorites':
-                    return ''
+                    return favoritesStore.searchFavoritesQuery
                 default:
                     return ''
             }
@@ -32,17 +33,13 @@
         set(value) {
             switch (props.type) {
                 case 'recommended':
-                    //recommendedSearchQuery.value = value
-                    featuredDataStore.searchSongsQuery = value
+                    songsStore.searchSongsQuery = value
                     break
                 case 'playlists':
-                    //playlistsSearchQuery.value = value
-                    // Update store for playlists when implemented
+                    playlistsStore.searchQuery = value
                     break
                 case 'favorites':
-                    //favoritesSearchQuery.value = value
-                    userSongsStore.searchFavoriteSongsQuery = value
-                    // Update store for favorites when implemented
+                    favoritesStore.searchFavoritesQuery = value
                     break
             }
         },

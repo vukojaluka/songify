@@ -5,8 +5,8 @@
     import IconPlaylistAdd from '@/components/icons/IconPlaylistAdd.vue'
     import IconHeart from '@/components/icons/IconHeart.vue'
 
-    import { useFeaturedDataStore } from '@/stores/featured-data'
-    import { useUserSongsStore } from '@/stores/user-songs'
+    import { useFeaturedDataStore } from '@/stores/useSongs'
+    import { useUserSongsStore } from '@/stores/useFavorites'
 
     import { songs } from '@/lib/data'
     import { timeAgo } from '@/lib/utils'

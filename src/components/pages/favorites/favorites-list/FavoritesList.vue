@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { FavoritesListItem } from '@/components/pages/favorites/favorites-list-item'
-    import { useUserSongsStore } from '@/stores/user-songs'
+    import { useUserSongsStore } from '@/stores/useFavorites'
 
     const userSongsStore = useUserSongsStore()
 </script>

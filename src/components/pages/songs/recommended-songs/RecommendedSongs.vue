@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { useFeaturedDataStore } from '@/stores/featured-data'
+    import { useFeaturedDataStore } from '@/stores/useSongs'
     import { RecommendedSongItem } from '@/components/pages/songs/recommended-song-item'
     const featuredDataStore = useFeaturedDataStore()
 </script>

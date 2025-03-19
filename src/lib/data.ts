@@ -5,7 +5,7 @@ export const songs = [
         artist: 'Dražen Zečić',
         duration: '3:45',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 2,
@@ -13,7 +13,7 @@ export const songs = [
         artist: 'Dražen Zečić',
         duration: '4:20',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 3,
@@ -21,7 +21,7 @@ export const songs = [
         artist: 'Oliver Dragojević',
         duration: '4:15',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 4,
@@ -29,7 +29,7 @@ export const songs = [
         artist: 'Oliver Dragojević',
         duration: '4:10',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 5,
@@ -37,7 +37,7 @@ export const songs = [
         artist: 'Minus i plus',
         duration: '3:55',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 6,
@@ -45,7 +45,7 @@ export const songs = [
         artist: 'Parni Valjak',
         duration: '4:30',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 7,
@@ -53,7 +53,7 @@ export const songs = [
         artist: 'Parni Valjak',
         duration: '4:25',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 8,
@@ -61,7 +61,7 @@ export const songs = [
         artist: 'Oliver Dragojević',
         duration: '4:05',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 9,
@@ -69,7 +69,7 @@ export const songs = [
         artist: 'Oliver Dragojević',
         duration: '3:50',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 10,
@@ -77,7 +77,7 @@ export const songs = [
         artist: 'Oliver Dragojević',
         duration: '4:00',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 11,
@@ -85,7 +85,7 @@ export const songs = [
         artist: 'Dražen Zečić',
         duration: '3:40',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 12,
@@ -93,7 +93,7 @@ export const songs = [
         artist: 'Parni Valjak',
         duration: '4:15',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 13,
@@ -101,7 +101,7 @@ export const songs = [
         artist: 'Parni Valjak',
         duration: '4:35',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 14,
@@ -109,7 +109,7 @@ export const songs = [
         artist: 'Oliver Dragojević',
         duration: '3:55',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 15,
@@ -117,7 +117,7 @@ export const songs = [
         artist: 'Oliver Dragojević',
         duration: '4:20',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 16,
@@ -125,7 +125,7 @@ export const songs = [
         artist: 'Dražen Zečić',
         duration: '3:50',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 17,
@@ -133,7 +133,7 @@ export const songs = [
         artist: 'Dražen Zečić',
         duration: '4:05',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 18,
@@ -141,7 +141,7 @@ export const songs = [
         artist: 'Parni Valjak',
         duration: '4:40',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 19,
@@ -149,7 +149,7 @@ export const songs = [
         artist: 'Parni Valjak',
         duration: '4:25',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
     {
         id: 20,
@@ -157,7 +157,7 @@ export const songs = [
         artist: 'Oliver Dragojević',
         duration: '3:45',
         isFavorite: false,
-        createdAt: null,
+        addedAt: null,
     },
 ] as {
     id: number
@@ -165,8 +165,10 @@ export const songs = [
     artist: string
     duration: string
     isFavorite: boolean
-    createdAt: null | string
+    addedAt: null | string
 }[]
+
+export type Song = (typeof songs)[number]
 
 export const featuredPlaylists = [
     {

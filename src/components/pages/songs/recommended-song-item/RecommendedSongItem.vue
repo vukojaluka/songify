@@ -4,8 +4,8 @@
     import IconHeart from '@/components/icons/IconHeart.vue'
     import IconPlaylistAdd from '@/components/icons/IconPlaylistAdd.vue'
 
-    import { useUserSongsStore } from '@/stores/user-songs'
-    import { useFeaturedDataStore } from '@/stores/featured-data'
+    import { useUserSongsStore } from '@/stores/useFavorites'
+    import { useFeaturedDataStore } from '@/stores/useSongs'
     import { songs } from '@/lib/data'
 
     const props = defineProps<{
