@@ -1,7 +1,5 @@
 <script setup lang="ts">
-    import { useFeaturedDataStore } from '@/stores/useSongs'
-
-    const featuredDataStore = useFeaturedDataStore()
+    import { featuredPlaylists } from '../../../../lib/data'
 </script>
 
 <template>
@@ -10,7 +8,7 @@
             class="scrollbar-hidden flex max-w-fit snap-x snap-mandatory flex-nowrap gap-[20px] overflow-x-auto scroll-smooth pr-[22px] lg:gap-[9px]"
         >
             <RouterLink
-                v-for="playlist in featuredDataStore.featuredPlaylists"
+                v-for="playlist in featuredPlaylists"
                 :key="playlist.id"
                 :to="`/playlists/${playlist.id}`"
             >

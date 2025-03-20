@@ -1,8 +1,9 @@
 <script setup lang="ts">
     import { FavoritesListItem } from '@/components/pages/favorites/favorites-list-item'
-    import { useUserSongsStore } from '@/stores/useFavorites'
 
-    const userSongsStore = useUserSongsStore()
+    import { useFavoritesStore } from '@/stores/use-favorites'
+
+    const favoritesStore = useFavoritesStore()
 </script>
 
 <template>
@@ -12,7 +13,7 @@
         class="relative flex max-w-[870px] flex-col gap-[18px] pr-[26px] lg:pr-[40px]"
     >
         <FavoritesListItem
-            v-for="favorite in userSongsStore.filteredFavoriteSongs"
+            v-for="favorite in favoritesStore.filteredFavorites"
             :key="favorite.id"
             :favorite="favorite"
         />

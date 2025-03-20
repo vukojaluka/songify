@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 
-import { useFavoritesStore } from './useFavorites'
+import { useFavoritesStore } from './use-favorites'
 
 import { songs as songsData, type Song } from '@/lib/data'
 import { getDataFromLocalStorage } from '@/lib/utils'
@@ -10,10 +10,10 @@ const SONGS_KEY = 'songs'
 const persistedSongs = getDataFromLocalStorage<Song[]>(SONGS_KEY) || songsData
 
 export const useSongsStore = defineStore('songs', () => {
-    const songs = ref(persistedSongs)
-
-    const searchSongsQuery = ref('')
     const favoritesStore = useFavoritesStore()
+
+    const songs = ref(persistedSongs)
+    const searchSongsQuery = ref('')
 
     const filteredSongs = computed(() => {
         return songs.value

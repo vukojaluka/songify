@@ -1,28 +1,24 @@
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 
-import { usePlaylistsStore } from './usePlaylists'
+import { usePlaylistsStore } from './use-playlists'
 
 import { type Song } from '@/lib/data'
-import { getDataFromLocalStorage } from '@/lib/utils'
+import { getDataFromLocalStorage, setDataToLocalStorage } from '@/lib/utils'
 
 const FAVORITES_KEY = 'favorites'
 const persistedFavorites = getDataFromLocalStorage<Record<number, Song>>(FAVORITES_KEY) || {}
 
 export const useFavoritesStore = defineStore('favorites', () => {
-    const favorites = ref<Record<number, Song>>(persistedFavorites)
-    const searchFavoritesQuery = ref('')
     const playlistsStore = usePlaylistsStore()
 
-    // Compute filtered favorite songs
+    const favorites = ref<Record<number, Song>>(persistedFavorites)
+    const searchFavoritesQuery = ref('')
+
     const filteredFavorites = computed(() => {
-        return Object.entries(favorites.value)
-            .map(([_, data]) => ({
-                ...data,
-            }))
-            .filter((song) =>
-                song.title.toLowerCase().includes(searchFavoritesQuery.value.toLowerCase()),
-            )
+        return Object.values(favorites.value).filter((song) =>
+            song.title.toLowerCase().includes(searchFavoritesQuery.value.toLowerCase()),
+        )
     })
 
     function addFavorite(song: Song) {
@@ -39,6 +35,16 @@ export const useFavoritesStore = defineStore('favorites', () => {
         delete favorites.value[songId]
         playlistsStore.updateFavoriteStatus(songId, false)
     }
+
+    watch(
+        favorites,
+        (newFavorites) => {
+            setDataToLocalStorage(FAVORITES_KEY, newFavorites)
+        },
+        {
+            deep: true,
+        },
+    )
 
     return { favorites, searchFavoritesQuery, filteredFavorites, addFavorite, removeFavorite }
 })

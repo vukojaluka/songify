@@ -5,9 +5,9 @@
     import IconSearch from '@/components/icons/IconSearch.vue'
 
     import { useTheme } from '@/hooks/use-theme'
-    import { useSongsStore } from '../../../stores/useSongs'
-    import { useFavoritesStore } from '../../../stores/useFavorites'
-    import { usePlaylistsStore } from '../../../stores/usePlaylists'
+    import { useSongsStore } from '../../../stores/use-songs'
+    import { useFavoritesStore } from '../../../stores/use-favorites'
+    import { usePlaylistsStore } from '../../../stores/use-playlists'
 
     const props = defineProps<{
         placeholder?: string
@@ -23,7 +23,7 @@
                 case 'recommended':
                     return songsStore.searchSongsQuery
                 case 'playlists':
-                    return playlistsStore.searchQuery
+                    return playlistsStore.searchPlaylistsQuery
                 case 'favorites':
                     return favoritesStore.searchFavoritesQuery
                 default:
@@ -36,7 +36,7 @@
                     songsStore.searchSongsQuery = value
                     break
                 case 'playlists':
-                    playlistsStore.searchQuery = value
+                    playlistsStore.searchPlaylistsQuery = value
                     break
                 case 'favorites':
                     favoritesStore.searchFavoritesQuery = value

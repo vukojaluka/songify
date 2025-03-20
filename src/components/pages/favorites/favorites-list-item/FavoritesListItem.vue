@@ -5,28 +5,24 @@
     import IconPlaylistAdd from '@/components/icons/IconPlaylistAdd.vue'
     import IconHeart from '@/components/icons/IconHeart.vue'
 
-    import { useFeaturedDataStore } from '@/stores/useSongs'
-    import { useUserSongsStore } from '@/stores/useFavorites'
+    import { useSongsStore } from '@/stores/use-songs'
 
-    import { songs } from '@/lib/data'
+    import { type Song } from '@/lib/data'
     import { timeAgo } from '@/lib/utils'
+
     const props = defineProps<{
-        favorite: (typeof songs)[number]
+        favorite: Song
     }>()
 
-    const userSongsStore = useUserSongsStore()
-    const featuredDataStore = useFeaturedDataStore()
+    const songsStore = useSongsStore()
 
-    const isFavoriteAnimating = ref(false)
-    function removeFavoriteSong(song: (typeof songs)[number]) {
-        isFavoriteAnimating.value = !song.isFavorite ? true : false
-        userSongsStore.removeSongFromFavorites(song.id)
-        featuredDataStore.toggleRecommendedFavoriteSong(song.id)
+    function removeFavoriteSong(song: Song) {
+        songsStore.toggleFavorite(song)
     }
 
     const formattedTimeAgo = computed(() => {
-        if (!props.favorite.createdAt) return ''
-        return timeAgo(props.favorite.createdAt)
+        if (!props.favorite.addedAt) return ''
+        return timeAgo(props.favorite.addedAt)
     })
 </script>
 

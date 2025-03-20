@@ -1,32 +1,26 @@
 <script setup lang="ts">
     import { onUnmounted, ref } from 'vue'
+
     import { SongItem } from '@/components/shared/song-item'
     import IconHeart from '@/components/icons/IconHeart.vue'
     import IconPlaylistAdd from '@/components/icons/IconPlaylistAdd.vue'
 
-    import { useUserSongsStore } from '@/stores/useFavorites'
-    import { useFeaturedDataStore } from '@/stores/useSongs'
-    import { songs } from '@/lib/data'
+    import { useSongsStore } from '@/stores/use-songs'
+    import { type Song } from '@/lib/data'
 
     const props = defineProps<{
-        song: (typeof songs)[number]
+        song: Song
     }>()
 
-    const userSongsStore = useUserSongsStore()
-    const featuredDataStore = useFeaturedDataStore()
+    const songsStore = useSongsStore()
 
     const isFavoriteAnimating = ref(false)
     const isFavoriteAnimatingTimeout = ref<number | null>(null)
     const FAVORITE_ANIMATION_DURATION = 500
 
-    function toggleFavoriteSong(song: (typeof songs)[number]) {
+    function toggleFavoriteSong(song: Song) {
         isFavoriteAnimating.value = !song.isFavorite ? true : false
-        if (song.isFavorite) {
-            userSongsStore.removeSongFromFavorites(song.id)
-        } else {
-            userSongsStore.addSongToFavorites(song)
-        }
-        featuredDataStore.toggleRecommendedFavoriteSong(song.id)
+        songsStore.toggleFavorite(song)
 
         isFavoriteAnimatingTimeout.value = setTimeout(() => {
             isFavoriteAnimating.value = false
