@@ -1,16 +1,17 @@
 <script setup lang="ts">
     import { onUnmounted, ref } from 'vue'
 
-    import { SongItem } from '@/components/shared/song-item'
+    import SongItem from '@/components/shared/song-item/SongItem.vue'
     import IconHeart from '@/components/icons/IconHeart.vue'
-    import IconPlaylistAdd from '@/components/icons/IconPlaylistAdd.vue'
+    import IconPlaylistRemove from '@/components/icons/IconPlaylistRemove.vue'
 
     import { useSongsStore } from '@/stores/use-songs'
+
     import { type Song } from '@/lib/data'
 
     const props = defineProps<{
         song: Song
-        onAddToPlaylist: (song: Song) => void
+        onRemoveSong?: () => void
     }>()
 
     const songsStore = useSongsStore()
@@ -37,17 +38,17 @@
 </script>
 
 <template>
-    <SongItem :song="props.song">
+    <SongItem :song="props.song" :key="props.song.id">
         <template #actions="{ isPlaying }">
             <div class="ml-auto flex items-center gap-[22px] pl-[15px]">
                 <span class="block text-sm leading-[150%]">{{ props.song.duration }}</span>
-                <transition name="actions-fade">
-                    <div v-if="!isPlaying" class="flex items-center gap-[22px]">
-                        <button @click="props.onAddToPlaylist(props.song)">
-                            <IconPlaylistAdd />
+                <div v-if="!isPlaying" class="flex w-[70px] flex-col gap-[7px]">
+                    <div class="flex items-center justify-end gap-[22px]">
+                        <button @click="props.onRemoveSong">
+                            <IconPlaylistRemove />
                         </button>
                         <button
-                            @click="toggleFavoriteSong(props.song)"
+                            @click="toggleFavoriteSong(song)"
                             :class="[
                                 props.song.isFavorite ? 'text-destructive' : 'text-action-button',
                                 { 'animate-pulse': isFavoriteAnimating },
@@ -61,25 +62,13 @@
                             />
                         </button>
                     </div>
-                </transition>
+                </div>
             </div>
         </template>
     </SongItem>
 </template>
 
 <style scoped>
-    .actions-fade-enter-active,
-    .actions-fade-leave-active {
-        @apply lg:transition-all lg:duration-200 lg:ease-in-out;
-    }
-    .actions-fade-enter-from {
-        @apply lg:opacity-0;
-    }
-    .actions-fade-leave-to,
-    .actions-fade-enter-to {
-        @apply lg:translate-x-[-50px] lg:opacity-0;
-    }
-
     .animate-pulse {
         animation: pulse 0.2s ease-out;
     }

@@ -16,9 +16,16 @@ export const useFavoritesStore = defineStore('favorites', () => {
     const searchFavoritesQuery = ref('')
 
     const filteredFavorites = computed(() => {
-        return Object.values(favorites.value).filter((song) =>
-            song.title.toLowerCase().includes(searchFavoritesQuery.value.toLowerCase()),
-        )
+        return Object.values(favorites.value)
+            .filter((song) =>
+                song.title.toLowerCase().includes(searchFavoritesQuery.value.toLowerCase()),
+            )
+            .sort((a, b) => {
+                if (a.addedAt && b.addedAt) {
+                    return new Date(b.addedAt).getTime() - new Date(a.addedAt).getTime()
+                }
+                return 0
+            })
     })
 
     function addFavorite(song: Song) {

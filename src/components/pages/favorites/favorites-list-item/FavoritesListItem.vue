@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref, computed } from 'vue'
+    import { computed } from 'vue'
 
     import SongItem from '@/components/shared/song-item/SongItem.vue'
     import IconPlaylistAdd from '@/components/icons/IconPlaylistAdd.vue'
@@ -12,6 +12,7 @@
 
     const props = defineProps<{
         favorite: Song
+        onAddToPlaylist: (song: Song) => void
     }>()
 
     const songsStore = useSongsStore()
@@ -33,7 +34,7 @@
                 <span class="block text-sm leading-[150%]">{{ props.favorite.duration }}</span>
                 <div v-if="!isPlaying" class="flex w-[70px] flex-col gap-[7px]">
                     <div class="flex items-center gap-[22px]">
-                        <button>
+                        <button @click="props.onAddToPlaylist(props.favorite)">
                             <IconPlaylistAdd />
                         </button>
                         <button

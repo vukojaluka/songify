@@ -14,12 +14,17 @@ export default {
             maxWidth: {
                 1200: '75rem',
             },
+            boxShadow: {
+                button: '0px 20px 50px 0px rgba(0, 0, 0, 0.04)',
+                input: '0px 10px 10px 0px hsla(174, 46%, 16%, 0.05)',
+            },
             borderRadius: {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)',
             },
             colors: {
+                'border-button-color': 'hsl(var(--border-button-color))',
                 'action-button': 'hsl(var(--action-button))',
                 'progress-bar': 'hsl(var(--progress-bar))',
                 'switch-thumb-background': 'hsl(var(--switch-thumb-background))',

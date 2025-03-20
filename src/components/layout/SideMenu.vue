@@ -6,6 +6,9 @@
     const route = useRoute()
 
     const isActive = (name: string) => {
+        if (route.meta.parentRouteName === name) {
+            return true
+        }
         return route.name === name
     }
 </script>
@@ -17,6 +20,9 @@
             :key="link.name"
             :to="link.path"
             class="flex h-[60px] flex-col items-center gap-[17px] text-foreground transition-colors ease-out lg:h-auto lg:flex-row lg:justify-start lg:gap-[23px] lg:py-[15px] lg:pl-[45px] [&:not(.router-link-active)]:dark:text-foreground/60 lg:[&:not(.router-link-active)]:hover:bg-secondary/25 [&:not(.router-link-active)]:lg:dark:text-foreground lg:[&:not(.router-link-active)]:dark:hover:bg-background/75"
+            :class="{
+                'router-link-active': isActive(link.name),
+            }"
         >
             <span
                 :key="link.path"

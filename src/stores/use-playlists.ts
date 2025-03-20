@@ -51,18 +51,20 @@ export const usePlaylistsStore = defineStore('playlists', () => {
             playlists.value[playlistId].songs = playlists.value[playlistId].songs.filter(
                 (song) => song.id !== songId,
             )
+            if (playlists.value[playlistId].songs.length === 0) {
+                delete playlists.value[playlistId]
+            }
         }
     }
 
     function updateFavoriteStatus(songId: number, isFavorite: boolean) {
-        for (const playlist of Object.values(playlists.value)) {
-            for (const song of playlist.songs) {
+        Object.values(playlists.value).forEach((playlist) => {
+            playlist.songs.forEach((song) => {
                 if (song.id === songId) {
                     song.isFavorite = isFavorite
-                    return
                 }
-            }
-        }
+            })
+        })
     }
 
     watch(

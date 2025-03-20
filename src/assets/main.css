@@ -37,6 +37,7 @@
         --progress-bar: 174 46% 16%;
         --circle-size: 44px;
         --action-button: 173 6% 75%;
+        --border-button-color: 0 0% 78%;
     }
     .dark {
         --background: 174 46% 16%;
@@ -53,7 +54,7 @@
         --muted-foreground: 0 0% 63.9%;
         --accent: 0 0% 14.9%;
         --accent-foreground: 174 79% 63%;
-        --destructive: 0 62.8% 30.6%;
+        --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
         --border: 0 0% 14.9%;
         --input: 0 0% 14.9%;
@@ -71,6 +72,9 @@
 @layer base {
     * {
         @apply border-border;
+    }
+    html {
+        scroll-behavior: smooth;
     }
     body {
         @apply min-h-screen bg-black font-normal text-foreground dark:bg-white;
