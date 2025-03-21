@@ -5,7 +5,7 @@
 </script>
 
 <template>
-    <Search placeholder="Search Favorites" type="favorites" />
+    <Search placeholder="Search Favorites" type="favorites" toggler-class-names="hidden lg:block" />
     <SectionHeader title="Favorites" sectionContentClass="lg:pl-[41px]">
         <FavoritesList />
     </SectionHeader>

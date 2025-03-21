@@ -13,9 +13,9 @@
             <template #title>
                 <div class="mr-[66px] flex grow items-center justify-between gap-[10px]">
                     <span class="block font-bold">{{ playlist.name }}</span>
-                    <span class="block text-sm text-black dark:text-white"
-                        >{{ playlist.songs.length }} songs</span
-                    >
+                    <span class="block text-sm text-black dark:text-white">
+                        {{ playlist.songs.length }} songs
+                    </span>
                 </div>
             </template>
             <template #content>
@@ -47,6 +47,6 @@
     }
 
     .fade-leave-active {
-        @apply absolute w-full opacity-0;
+        @apply absolute w-full max-w-[calc(100%-27px)] opacity-0 lg:max-w-[calc(870px-42px-19px)];
     }
 </style>

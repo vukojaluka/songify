@@ -8,10 +8,12 @@
     import { useSongsStore } from '../../../stores/use-songs'
     import { useFavoritesStore } from '../../../stores/use-favorites'
     import { usePlaylistsStore } from '../../../stores/use-playlists'
+    import { cn } from '@/lib/utils'
 
     const props = defineProps<{
         placeholder?: string
         type: 'recommended' | 'playlists' | 'favorites'
+        togglerClassNames?: string
     }>()
 
     const songsStore = useSongsStore()
@@ -58,6 +60,10 @@
                 :placeholder="props.placeholder"
             />
         </div>
-        <Switch :model-value="!isDark" @update:model-value="toggleTheme" />
+        <Switch
+            :class="cn(props.togglerClassNames)"
+            :model-value="!isDark"
+            @update:model-value="toggleTheme"
+        />
     </div>
 </template>

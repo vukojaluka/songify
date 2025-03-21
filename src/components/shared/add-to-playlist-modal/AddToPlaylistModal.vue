@@ -98,9 +98,9 @@
                                 <div
                                     class="mr-[20px] flex grow items-center justify-between gap-[10px] lg:mr-[66px]"
                                 >
-                                    <span class="block text-left font-bold">{{
-                                        playlist.name
-                                    }}</span>
+                                    <span class="block text-left font-bold">
+                                        {{ playlist.name }}
+                                    </span>
                                     <span class="block text-sm text-black dark:text-white">
                                         {{ playlist.songs.length }} songs
                                     </span>
@@ -136,3 +136,24 @@
         :state="isCreatePlaylistModalOpen ? 'back' : 'default'"
     />
 </template>
+
+<style scoped>
+    .fade-move,
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+        @apply opacity-0;
+    }
+
+    .fade-leave-from {
+        @apply opacity-100;
+    }
+
+    .fade-leave-active {
+        @apply absolute w-full max-w-[350px] opacity-0 lg:max-w-[407px];
+    }
+</style>

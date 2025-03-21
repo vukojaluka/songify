@@ -70,6 +70,7 @@
 
     function handleDialogClose() {
         resetForm()
+        dialogOpen.value = false
         emit('close')
     }
     function handleBack() {

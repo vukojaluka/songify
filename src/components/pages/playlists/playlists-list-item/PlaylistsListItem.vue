@@ -72,23 +72,4 @@
     .animate-pulse {
         animation: pulse 0.2s ease-out;
     }
-
-    @keyframes pulse {
-        0% {
-            transform: scale(1);
-        }
-
-        70% {
-            transform: scale(1.8);
-        }
-
-        98% {
-            opacity: 0.8;
-            transform: scale(2.2);
-        }
-
-        100% {
-            transform: scale(1);
-        }
-    }
 </style>

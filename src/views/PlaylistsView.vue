@@ -6,7 +6,7 @@
 </script>
 
 <template>
-    <Search placeholder="Find playlist" type="playlists" />
+    <Search placeholder="Find playlist" type="playlists" toggler-class-names="hidden lg:block" />
     <SectionHeader title="My Playlists" sectionContentClass="lg:pl-[22px]">
         <PlaylistsCreate />
         <PlaylistsList />
