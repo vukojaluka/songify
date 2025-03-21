@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import { onUnmounted, ref } from 'vue'
     import { Check } from 'lucide-vue-next'
 
     import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
@@ -10,7 +11,6 @@
     import { usePlaylistsStore } from '@/stores/use-playlists'
 
     import type { Song } from '@/lib/data'
-    import { ref } from 'vue'
 
     const props = defineProps<{
         isOpen: boolean
@@ -19,22 +19,50 @@
     }>()
 
     const playlistsStore = usePlaylistsStore()
-
     function addSongToPlaylist(playlistId: string) {
         playlistsStore.addSongToPlaylist(playlistId, props.song!)
         props.onClose()
     }
 
-    const isCreatePlaylistModalOpen = ref(false)
+    const isAnimationEnabled = ref(false)
+    const animationTimeout = ref<number | null>(null)
+    const ANIMATION_DURATION = 200
 
+    const isCreatePlaylistModalOpen = ref(false)
     function openCreatePlaylistModal() {
         isCreatePlaylistModalOpen.value = true
+        isAnimationEnabled.value = true
     }
+    function closeCreatePlaylistModal() {
+        isCreatePlaylistModalOpen.value = false
+        isAnimationEnabled.value = false
+        props.onClose()
+    }
+    function backToAddToPlaylistModal() {
+        isCreatePlaylistModalOpen.value = false
+
+        animationTimeout.value = setTimeout(() => {
+            isAnimationEnabled.value = false
+        }, ANIMATION_DURATION)
+    }
+
+    onUnmounted(() => {
+        if (animationTimeout.value) {
+            clearTimeout(animationTimeout.value)
+        }
+    })
 </script>
 
 <template>
     <Dialog :open="props.isOpen" @update:open="(open) => !open && props.onClose()">
-        <DialogContent :animation-enabled="false">
+        <DialogContent
+            :animation-enabled="isAnimationEnabled"
+            class="max-h-[75%] w-full max-w-[570px] overflow-y-auto transition-transform duration-200 ease-out"
+            :class="{
+                'pointer-events-none !-translate-x-[100vw] opacity-0': isCreatePlaylistModalOpen,
+                '!-translate-x-1/2 opacity-100': !isCreatePlaylistModalOpen,
+            }"
+        >
             <DialogHeader>
                 <DialogTitle class="text-xl font-bold leading-[100%]">Add to Playlist</DialogTitle>
             </DialogHeader>
@@ -64,7 +92,7 @@
                         <Accordion
                             v-for="playlist in playlistsStore.playlists"
                             :key="playlist.id"
-                            title-class-names="!pr-0 !pl-0"
+                            title-class-names="!pl-0 lg:!pr-0"
                         >
                             <template #title>
                                 <div
@@ -101,7 +129,10 @@
 
     <NewPlaylistModal
         :is-trigger-button-visible="false"
+        :is-nested="true"
         :is-open="isCreatePlaylistModalOpen"
-        @close="isCreatePlaylistModalOpen = false"
+        @back="backToAddToPlaylistModal"
+        @close="closeCreatePlaylistModal"
+        :state="isCreatePlaylistModalOpen ? 'back' : 'default'"
     />
 </template>

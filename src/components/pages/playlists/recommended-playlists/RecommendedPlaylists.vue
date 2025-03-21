@@ -15,7 +15,7 @@
         songToAddToPlaylist.value = song
     }
 
-    function toggleModal() {
+    function closeModal() {
         songToAddToPlaylist.value = null
     }
 </script>
@@ -31,7 +31,7 @@
     </div>
     <AddToPlaylistModal
         :is-open="!!songToAddToPlaylist"
-        @close="toggleModal"
+        @close="closeModal"
         :song="songToAddToPlaylist"
     />
 </template>

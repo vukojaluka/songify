@@ -10,6 +10,7 @@
     } from '@/components/ui/dialog'
     import { Button } from '@/components/ui/button'
     import { Input } from '@/components/ui/input'
+    import IconArrowRight from '@/components/icons/IconArrowRight.vue'
 
     import { usePlaylistsStore } from '@/stores/use-playlists'
 
@@ -17,22 +18,26 @@
         defineProps<{
             isTriggerButtonVisible?: boolean
             isOpen?: boolean
+            isNested?: boolean
+            state?: 'default' | 'back'
         }>(),
         {
             isTriggerButtonVisible: true,
             isOpen: false,
+            isNested: false,
+            state: 'default',
         },
     )
 
     const emit = defineEmits<{
         (e: 'close'): void
+        (e: 'back'): void
     }>()
 
     const playlistsStore = usePlaylistsStore()
 
     const dialogOpen = ref(props.isOpen)
 
-    // Watch for changes in props.isOpen to sync with internal state
     watch(
         () => props.isOpen,
         (newValue) => {
@@ -55,14 +60,21 @@
         }
 
         playlistsStore.createPlaylist(playlistName.value)
-        resetForm()
-        dialogOpen.value = false
-        emit('close')
+
+        if (props.state === 'default') {
+            handleDialogClose()
+        } else {
+            handleBack()
+        }
     }
 
     function handleDialogClose() {
         resetForm()
         emit('close')
+    }
+    function handleBack() {
+        resetForm()
+        emit('back')
     }
 </script>
 
@@ -71,8 +83,13 @@
         <DialogTrigger as-child v-if="props.isTriggerButtonVisible">
             <Button>Create new Playlist</Button>
         </DialogTrigger>
-        <DialogContent>
-            <DialogHeader>
+        <DialogContent :animation-enabled="props.isNested">
+            <DialogHeader class="flex flex-row items-center gap-[52px]">
+                <IconArrowRight
+                    v-if="props.isNested"
+                    class="rotate-180 cursor-pointer"
+                    @click="handleBack"
+                />
                 <DialogTitle class="text-xl font-bold leading-[100%]">New Playlist</DialogTitle>
             </DialogHeader>
 

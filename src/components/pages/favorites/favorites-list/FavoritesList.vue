@@ -15,7 +15,7 @@
         songToAddToPlaylist.value = song
     }
 
-    function toggleModal() {
+    function closeModal() {
         songToAddToPlaylist.value = null
     }
 </script>
@@ -35,7 +35,7 @@
     </TransitionGroup>
     <AddToPlaylistModal
         :is-open="!!songToAddToPlaylist"
-        @close="toggleModal"
+        @close="closeModal"
         :song="songToAddToPlaylist"
     />
 </template>
