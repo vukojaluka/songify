@@ -176,105 +176,105 @@ export const featuredPlaylists = [
         title: 'Croatian Classics',
         thumbnail:
             'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&w=480&q=90',
-        songs: [songs[13], songs[14], songs[15], songs[16]],
+        songs: [songs[13], songs[14], songs[15], songs[16]].filter(Boolean),
     },
     {
         id: 2,
         title: 'Best of Oliver Dragojević',
         thumbnail:
             'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&w=480&q=90',
-        songs: [songs[14], songs[15], songs[20]],
+        songs: [songs[14], songs[15], songs[20]].filter(Boolean),
     },
     {
         id: 3,
         title: 'Parni Valjak Collection',
         thumbnail:
             'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&w=480&q=90',
-        songs: [songs[13], songs[18], songs[19]],
+        songs: [songs[13], songs[18], songs[19]].filter(Boolean),
     },
     {
         id: 4,
         title: 'Dražen Zečić Hits',
         thumbnail:
             'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&w=480&q=90',
-        songs: [songs[16], songs[17]],
+        songs: [songs[16], songs[17]].filter(Boolean),
     },
     {
         id: 5,
         title: 'Summer Vibes',
         thumbnail:
             'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&w=480&q=90',
-        songs: [songs[14], songs[20], songs[15]],
+        songs: [songs[14], songs[20], songs[15]].filter(Boolean),
     },
     {
         id: 6,
         title: 'Romantic Ballads',
         thumbnail:
             'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&w=480&q=90',
-        songs: [songs[13], songs[16], songs[17]],
+        songs: [songs[13], songs[16], songs[17]].filter(Boolean),
     },
     {
         id: 7,
         title: 'Rock Classics',
         thumbnail:
             'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?auto=format&w=480&q=90',
-        songs: [songs[18], songs[19], songs[13]],
+        songs: [songs[18], songs[19], songs[13]].filter(Boolean),
     },
     {
         id: 8,
         title: 'Dalmatian Nights',
         thumbnail:
             'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&w=480&q=90',
-        songs: [songs[14], songs[15], songs[20]],
+        songs: [songs[14], songs[15], songs[20]].filter(Boolean),
     },
     {
         id: 9,
         title: 'Evening Melodies',
         thumbnail:
             'https://images.unsplash.com/photo-1495312040802-a929cd14a6ab?auto=format&w=480&q=90',
-        songs: [songs[16], songs[17], songs[13]],
+        songs: [songs[16], songs[17], songs[13]].filter(Boolean),
     },
     {
         id: 10,
         title: 'Croatian Legends',
         thumbnail:
             'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&w=480&q=90',
-        songs: [songs[14], songs[18], songs[19]],
+        songs: [songs[14], songs[18], songs[19]].filter(Boolean),
     },
     {
         id: 11,
         title: 'Seaside Stories',
         thumbnail:
             'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&w=480&q=90',
-        songs: [songs[20], songs[15], songs[14]],
+        songs: [songs[20], songs[15], songs[14]].filter(Boolean),
     },
     {
         id: 12,
         title: 'Nostalgic Mix',
         thumbnail:
             'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&w=480&q=90',
-        songs: [songs[13], songs[16], songs[19]],
+        songs: [songs[13], songs[16], songs[19]].filter(Boolean),
     },
     {
         id: 13,
         title: 'Sunset Collection',
         thumbnail:
             'https://images.unsplash.com/photo-1494548162494-384bba4ab999?auto=format&w=480&q=90',
-        songs: [songs[15], songs[17], songs[20]],
+        songs: [songs[15], songs[17], songs[20]].filter(Boolean),
     },
     {
         id: 14,
         title: 'Croatian Rock',
         thumbnail:
             'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?auto=format&w=480&q=90',
-        songs: [songs[18], songs[19], songs[13]],
+        songs: [songs[18], songs[19], songs[13]].filter(Boolean),
     },
     {
         id: 15,
         title: 'Mediterranean Moods',
         thumbnail:
             'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&w=480&q=90',
-        songs: [songs[14], songs[15], songs[20]],
+        songs: [songs[14], songs[15], songs[20]].filter(Boolean),
     },
 ]
 

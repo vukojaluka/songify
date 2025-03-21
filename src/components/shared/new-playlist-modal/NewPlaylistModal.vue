@@ -93,7 +93,7 @@
                     }}</span>
                 </form>
                 <DialogFooter>
-                    <Button type="submit">New Playlist</Button>
+                    <Button @click="handleCreatePlaylist">New Playlist</Button>
                 </DialogFooter>
             </div>
         </DialogContent>

@@ -39,9 +39,23 @@
                 <DialogTitle class="text-xl font-bold leading-[100%]">Add to Playlist</DialogTitle>
             </DialogHeader>
 
-            <div class="my-[50px] flex w-full flex-col items-center gap-y-[50px] px-[16px]">
+            <div
+                class="my-[20px] flex w-full flex-col items-center gap-y-[18px] lg:my-[50px] lg:gap-y-[50px] lg:px-[16px]"
+            >
+                <div
+                    v-if="song"
+                    class="flex w-full items-center justify-between gap-y-[20px] px-[30px] lg:hidden"
+                >
+                    <div class="flex flex-col justify-between gap-y-[10px]">
+                        <span class="font-bold text-foreground/60">{{ song.artist }}</span>
+                        <span class="text-sm leading-[100%] text-foreground/60">{{
+                            song.title
+                        }}</span>
+                    </div>
+                    <span class="text-[15px] text-foreground/60">{{ song.duration }}</span>
+                </div>
                 <Button type="button" @click="openCreatePlaylistModal">New Playlist</Button>
-                <div class="w-full">
+                <div class="w-full" v-if="Object.keys(playlistsStore.playlists).length > 0">
                     <TransitionGroup
                         name="fade"
                         tag="div"
@@ -54,9 +68,11 @@
                         >
                             <template #title>
                                 <div
-                                    class="mr-[66px] flex grow items-center justify-between gap-[10px]"
+                                    class="mr-[20px] flex grow items-center justify-between gap-[10px] lg:mr-[66px]"
                                 >
-                                    <span class="block font-bold">{{ playlist.name }}</span>
+                                    <span class="block text-left font-bold">{{
+                                        playlist.name
+                                    }}</span>
                                     <span class="block text-sm text-black dark:text-white">
                                         {{ playlist.songs.length }} songs
                                     </span>

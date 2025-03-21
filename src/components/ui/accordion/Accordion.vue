@@ -11,7 +11,7 @@
 </script>
 
 <template>
-    <div class="flex w-full max-w-[870px] flex-col">
+    <div class="flex w-full max-w-full flex-col lg:max-w-[870px]">
         <button
             type="button"
             :class="

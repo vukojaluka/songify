@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 
 import { useFavoritesStore } from './use-favorites'
 
-import type { Song } from '@/lib/data'
+import { featuredPlaylists as featuredPlaylistsData } from '@/lib/data'
+import type { FeaturedPlaylist, Song } from '@/lib/data'
 import { getDataFromLocalStorage, setDataToLocalStorage } from '@/lib/utils'
 
 type Playlist = {
@@ -15,8 +16,27 @@ type Playlist = {
 const PLAYLISTS_KEY = 'playlists'
 const persistedPlaylists = getDataFromLocalStorage<Record<string, Playlist>>(PLAYLISTS_KEY) || {}
 
+const FEATURED_PLAYLISTS_KEY = 'featuredPlaylists'
+const persistedFeaturedPlaylists =
+    getDataFromLocalStorage<FeaturedPlaylist[]>(FEATURED_PLAYLISTS_KEY) || featuredPlaylistsData
+
+const bootstrapPublicData = () => {
+    const featuredPlaylists =
+        getDataFromLocalStorage<FeaturedPlaylist[]>(FEATURED_PLAYLISTS_KEY) || featuredPlaylistsData
+
+    if (!featuredPlaylists) {
+        setDataToLocalStorage(FEATURED_PLAYLISTS_KEY, featuredPlaylistsData)
+    }
+
+    return { featuredPlaylists }
+}
+
+bootstrapPublicData()
+
 export const usePlaylistsStore = defineStore('playlists', () => {
     const favoritesStore = useFavoritesStore()
+
+    const featuredPlaylists = ref(persistedFeaturedPlaylists)
 
     const playlists = ref<Record<string, Playlist>>(persistedPlaylists)
     const searchPlaylistsQuery = ref('')
@@ -65,12 +85,40 @@ export const usePlaylistsStore = defineStore('playlists', () => {
                 }
             })
         })
+        Object.values(featuredPlaylists.value).forEach((playlist) => {
+            playlist.songs.forEach((song) => {
+                if (song && song.id === songId) {
+                    song.isFavorite = isFavorite
+                }
+            })
+        })
+    }
+
+    function addPublicPlaylistToMyPlaylists(playlist: FeaturedPlaylist) {
+        const playlistId = crypto.randomUUID()
+        if (!(playlistId in playlists.value)) {
+            playlists.value[playlistId] = {
+                id: playlistId,
+                name: playlist.title,
+                songs: playlist.songs,
+            }
+        }
     }
 
     watch(
         playlists,
         (newPlaylists) => {
             setDataToLocalStorage(PLAYLISTS_KEY, newPlaylists)
+        },
+        {
+            deep: true,
+        },
+    )
+
+    watch(
+        featuredPlaylists,
+        (newFeaturedPlaylists) => {
+            setDataToLocalStorage(FEATURED_PLAYLISTS_KEY, newFeaturedPlaylists)
         },
         {
             deep: true,
@@ -85,5 +133,7 @@ export const usePlaylistsStore = defineStore('playlists', () => {
         addSongToPlaylist,
         removeSongFromPlaylist,
         updateFavoriteStatus,
+        featuredPlaylists,
+        addPublicPlaylistToMyPlaylists,
     }
 })

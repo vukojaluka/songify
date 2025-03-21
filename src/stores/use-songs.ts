@@ -3,25 +3,26 @@ import { defineStore } from 'pinia'
 
 import { useFavoritesStore } from './use-favorites'
 
-import {
-    songs as songsData,
-    type Song,
-    featuredPlaylists as featuredPlaylistsData,
-    type FeaturedPlaylist,
-} from '@/lib/data'
-import { getDataFromLocalStorage } from '@/lib/utils'
+import { songs as songsData, type Song, featuredPlaylists } from '@/lib/data'
+import { getDataFromLocalStorage, setDataToLocalStorage } from '@/lib/utils'
 
 const SONGS_KEY = 'songs'
 const persistedSongs = getDataFromLocalStorage<Song[]>(SONGS_KEY) || songsData
 
-const FEATURED_PLAYLISTS_KEY = 'featuredPlaylists'
-const persistedFeaturedPlaylists =
-    getDataFromLocalStorage<FeaturedPlaylist[]>(FEATURED_PLAYLISTS_KEY) || featuredPlaylistsData
+const bootstrapPublicData = () => {
+    const songs = getDataFromLocalStorage<Song[]>(SONGS_KEY) || songsData
+
+    if (!songs) {
+        setDataToLocalStorage(SONGS_KEY, songsData)
+    }
+
+    return { songs, featuredPlaylists }
+}
+
+bootstrapPublicData()
 
 export const useSongsStore = defineStore('songs', () => {
     const favoritesStore = useFavoritesStore()
-
-    const featuredPlaylists = ref(persistedFeaturedPlaylists)
 
     const songs = ref(persistedSongs)
     const searchSongsQuery = ref('')
@@ -45,5 +46,5 @@ export const useSongsStore = defineStore('songs', () => {
         }
     }
 
-    return { songs, searchSongsQuery, filteredSongs, toggleFavorite, featuredPlaylists }
+    return { songs, searchSongsQuery, filteredSongs, toggleFavorite }
 })

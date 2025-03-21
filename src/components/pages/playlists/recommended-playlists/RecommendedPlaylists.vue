@@ -4,11 +4,11 @@
     import { RecommendedSongItem } from '@/components/pages/songs/recommended-song-item'
     import { AddToPlaylistModal } from '@/components/shared/add-to-playlist-modal'
 
-    import { useSongsStore } from '@/stores/use-songs'
-
     import type { Song } from '@/lib/data'
 
-    const songsStore = useSongsStore()
+    const props = defineProps<{
+        playlistSongs: Song[]
+    }>()
 
     const songToAddToPlaylist = ref<Song | null>(null)
     function addSongToPlaylist(song: Song) {
@@ -23,7 +23,7 @@
 <template>
     <div class="flex max-w-[870px] flex-col gap-[10px] pr-[26px] lg:gap-[18px] lg:pr-[40px]">
         <RecommendedSongItem
-            v-for="song in songsStore.filteredSongs"
+            v-for="song in props.playlistSongs"
             :key="song.id"
             :song="song"
             @add-to-playlist="addSongToPlaylist"
