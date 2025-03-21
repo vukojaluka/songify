@@ -12,9 +12,9 @@ pnpm create vue@latest
 
 with following options: Typescript, Vue Router, Pinia, Prettier and ESLint.
 
-For the styling it is using tailwind 3 css and [shadcn/vue](https://www.shadcn-vue.com/) components based on tailwind.
+For the styling it is using Tailwind 3 css and [shadcn/vue](https://www.shadcn-vue.com/) components based on Tailwind css.
 
-## Install Dependencies
+## Get start
 
 ```sh
 pnpm install
@@ -26,14 +26,8 @@ pnpm install
 pnpm dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Compile and Minify for Production
 
 ```sh
 pnpm build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
 ```
