@@ -17,8 +17,6 @@ const PLAYLISTS_KEY = 'playlists'
 const persistedPlaylists = getDataFromLocalStorage<Record<string, Playlist>>(PLAYLISTS_KEY) || {}
 
 const FEATURED_PLAYLISTS_KEY = 'featuredPlaylists'
-const persistedFeaturedPlaylists =
-    getDataFromLocalStorage<FeaturedPlaylist[]>(FEATURED_PLAYLISTS_KEY) || featuredPlaylistsData
 
 const bootstrapPublicData = () => {
     const featuredPlaylists =
@@ -27,11 +25,11 @@ const bootstrapPublicData = () => {
     if (!featuredPlaylists) {
         setDataToLocalStorage(FEATURED_PLAYLISTS_KEY, featuredPlaylistsData)
     }
-
-    return { featuredPlaylists }
 }
-
 bootstrapPublicData()
+
+const persistedFeaturedPlaylists =
+    getDataFromLocalStorage<FeaturedPlaylist[]>(FEATURED_PLAYLISTS_KEY) || featuredPlaylistsData
 
 export const usePlaylistsStore = defineStore('playlists', () => {
     const favoritesStore = useFavoritesStore()
